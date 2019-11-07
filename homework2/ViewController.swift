@@ -14,11 +14,25 @@ class ViewController: UIViewController {
     var count = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        count = UserDefaults.standard.integer(forKey: "count")
+        label.text = "Score: \(count), click one more!"
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     @IBAction func button(_ sender: Any) {
         count = count + 1
         label.text = "Score: \(count), click one more!"
+        UserDefaults.standard.set(count, forKey: "count")
+        
+    
     }
     
+    @IBAction func reset(_ sender: Any) {
+        count = 0
+        UserDefaults.standard.removeObject(forKey: "count")
+        label.text = "Score: \(count), click one more!"
+    }
 }
 
